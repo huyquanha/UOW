@@ -1,0 +1,27 @@
+﻿@page
+@model UOW.Pages.BoxModel
+@{
+    ViewData["Title"] = "Box";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Box</h2>
+
+<form id="boxForm">
+    <div class="form-group">
+        <label for="boxes" class="control-label">Number of boxes to generate:</label>
+        <input type="text" class="form-control" id="boxes" name="boxes" />
+        <span for="boxes" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-default" />
+    </div>
+</form>
+<div id="box-wrapper">
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

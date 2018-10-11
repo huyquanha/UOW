@@ -1,0 +1,45 @@
+﻿@page "{id}"
+@model UOW.Pages.Enrolments.CreateModel
+
+@{
+    ViewData["Title"] = "Enrol";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Enrol</h2>
+
+<h4>Enrolment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Enrolment.SubjectCode" class="control-label"></label>
+                <!--<select asp-for="Enrolment.SubjectCode" class ="form-control" asp-items="ViewBag.SubjectCode"></select>-->
+                <input asp-for="Enrolment.SubjectCode" class="form-control" readonly/>
+            </div>
+            <!--<div class="form-group">
+                <label asp-for="Enrolment.EnrolDate" class="control-label"></label>
+                <input asp-for="Enrolment.EnrolDate" class="form-control" />
+                <span asp-validation-for="Enrolment.EnrolDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Enrolment.Grade" class="control-label"></label>
+                <input asp-for="Enrolment.Grade" class="form-control" />
+                <span asp-validation-for="Enrolment.Grade" class="text-danger"></span>
+            </div>-->
+            <div class="form-group">
+                <input type="submit" value="Enrol" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Subjects/Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

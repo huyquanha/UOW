@@ -1,0 +1,132 @@
+﻿@page
+@model UOW.Pages.Enrolments.IndexModel
+@using Microsoft.AspNetCore.Authorization
+@using UOW.Authorization
+
+@{
+    ViewData["Title"] = "Enrolment Record";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Enrolment Record</h2>
+
+<div id="enrolmentTabs">
+    <ul>
+        <li><a href="#graded">Graded Enrolments</a></li>
+        <li><a href="#new">New Enrolments</a></li>
+    </ul>
+    <div id="graded">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GradedEnrolment[0].EnrolDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GradedEnrolment[0].Grade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GradedEnrolment[0].Subject.SubjectCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GradedEnrolment[0].Subject.Title)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GradedEnrolment)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnrolDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject.SubjectCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject.Title)
+                    </td>
+                    <td>
+                        @*@if ((await Model.AuthorizationService.AuthorizeAsync(
+                                 User, item, EnrolmentOperations.Update)).Succeeded)
+                            {
+                                <a asp-page="./Edit" asp-route-id="@item.EnrolmentID">Edit</a>
+                                <text> | </text>
+                            }*@
+
+                        <a asp-page="./Details" style="color:blue" asp-route-id="@item.EnrolmentID">Details</a>
+
+                        @*@if ((await Model.AuthorizationService.AuthorizeAsync(
+                            User, item, EnrolmentOperations.Delete)).Succeeded)
+                        {
+                            <text> | </text>
+                            <a asp-page="./Delete" style="color:blue" asp-route-id="@item.EnrolmentID">Delete</a>
+
+                        }*@
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="new">
+        <p>
+            <!--<a asp-page="Create" style="color:blue">Create New</a>-->
+            <a asp-page="/Subjects/Index" style="color:blue">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NewEnrolment[0].EnrolDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NewEnrolment[0].Subject.SubjectCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NewEnrolment[0].Subject.Title)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.NewEnrolment)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnrolDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject.SubjectCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject.Title)
+                    </td>
+                    <td>
+                        @*@if ((await Model.AuthorizationService.AuthorizeAsync(
+                           User, item, EnrolmentOperations.Update)).Succeeded)
+                        {
+                            <a asp-page="./Edit" style="color:blue" asp-route-id="@item.EnrolmentID">Edit</a>
+                            <text> | </text>
+                        }*@
+
+                        <a asp-page="./Details" style="color:blue" asp-route-id="@item.EnrolmentID">Details</a>
+
+                        @if ((await Model.AuthorizationService.AuthorizeAsync(
+                           User, item, EnrolmentOperations.Delete)).Succeeded)
+                        {
+                            <text> | </text>
+                            <a asp-page="./Delete" style="color:blue" asp-route-id="@item.EnrolmentID">Delete</a>
+
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

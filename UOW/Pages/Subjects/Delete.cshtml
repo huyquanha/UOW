@@ -1,0 +1,47 @@
+﻿@page
+@model UOW.Pages.Subjects.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Subject</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Session)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Session)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Credits)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Credits)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject.Description)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Subject.SubjectCode" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

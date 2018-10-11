@@ -1,0 +1,65 @@
+﻿@page
+@model UOW.Pages.Subjects.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<!--<p>
+    <a asp-page="Create">Create New</a>
+</p>-->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject[0].SubjectCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject[0].Session)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject[0].Credits)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Subject) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Session)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credits)
+            </td>
+            <td>
+                @{
+                    if (ViewData[item.SubjectCode].Equals("Not Enrolled"))
+                    {
+                        <a asp-page="/Enrolments/Create" asp-route-id="@item.SubjectCode">Enrol</a>
+                        <text>|</text>
+                    }
+                    else
+                    {
+                        <a asp-page="/Enrolments/Delete" asp-route-id="@ViewData[item.SubjectCode]">Withdraw</a>
+                        <text> | </text>
+                    }
+                }
+                <a asp-page="./Details" asp-route-id="@item.SubjectCode">Details</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
